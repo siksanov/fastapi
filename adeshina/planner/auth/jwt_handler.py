@@ -17,7 +17,7 @@ def create_access_token(user: str) -> str:
                        algorithm="HS256")
     return token
 
-def verify_access_toke(token: str) -> dict:
+def verify_access_token(token: str) -> dict:
     try:
         data = jwt.decode(token, settings.SECRET_KEY,
                           algorithms=["HS256"])
