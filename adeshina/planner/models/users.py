@@ -7,7 +7,6 @@ from models.events import Event
 class User(Document):
     email: EmailStr
     password: str
-    events: Optional[List[Link[Event]]]
 
     class Settings:
         name = "users"
@@ -21,6 +20,6 @@ class User(Document):
             }
         }
 
-class UserSignIn(BaseModel):
-    email: EmailStr
-    password: str
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str

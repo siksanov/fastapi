@@ -8,6 +8,12 @@ from routes.users import user_router
 
 from contextlib import asynccontextmanager
 
+from fastapi.middleware.cors import CORSMiddleware
+
+# register origins
+
+origins = ["*"]
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await settings.initialize_database()
@@ -15,6 +21,13 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 settings = Settings()
 
 # Register routes

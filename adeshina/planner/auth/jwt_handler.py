@@ -17,7 +17,7 @@ def create_access_token(user: str) -> str:
                        algorithm="HS256")
     return token
 
-def verify_access_toke(token: str) -> dict:
+def verify_access_token(token: str) -> dict:
     try:
         data = jwt.decode(token, settings.SECRET_KEY,
                           algorithms=["HS256"])
@@ -28,7 +28,7 @@ def verify_access_toke(token: str) -> dict:
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="No access token supplied"
             )
-        if datetime.now() > datetime.date(expire):
+        if time.time() > expire:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Token expired!"
