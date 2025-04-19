@@ -36,7 +36,7 @@ async def create_event(body: Event, user: str = Depends(authenticate)) -> dict:
     body.creator = user
     await event_database.save(body)
     return {
-        "message": "Event created successfully"
+        "message": "Event created successfully."
     }
 
 @event_router.put("/{id}", response_model=Event)
